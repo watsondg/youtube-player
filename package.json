@@ -1,0 +1,37 @@
+{
+  "name": "youtube-player",
+  "version": "1.0.0",
+  "description": "A wrapper around the Youtube Iframe API.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "browserify test/index.js | tap-closer | smokestack | faucet",
+    "test-debug": "budo test/index.js --live"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/watsondg/youtube-player.git"
+  },
+  "keywords": [
+    "youtube",
+    "player",
+    "video"
+  ],
+  "author": "Florian Morel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watsondg/youtube-player/issues"
+  },
+  "homepage": "https://github.com/watsondg/youtube-player#readme",
+  "dependencies": {
+    "tiny-emitter": "^1.0.2"
+  },
+  "devDependencies": {
+    "faucet": "0.0.1",
+    "smokestack": "^3.4.1",
+    "tap-closer": "^1.0.0",
+    "tape": "^4.5.1"
+  }
+}
