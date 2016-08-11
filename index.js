@@ -148,6 +148,36 @@ Youtube.prototype.seek = function(time) {
     this.player.playVideo();
 };
 
+Youtube.prototype.volume = function(value) {
+    if (!this.player) return;
+
+    this.player.setVolume(value * 100);
+};
+
+Youtube.prototype.mute = function() {
+    if (!this.player) return;
+
+    this.player.mute();
+};
+
+Youtube.prototype.unmute = function() {
+    if (!this.player) return;
+
+    this.player.unMute();
+};
+
+Youtube.prototype.isMuted = function() {
+    if (!this.player) return false;
+
+    return this.player.isMuted();
+};
+
+Youtube.prototype.getVolume = function() {
+    if (!this.player) return 0;
+
+    return this.player.getVolume();
+};
+
 Youtube.prototype.getDuration = function() {
     if (!this.player) return 0;
 

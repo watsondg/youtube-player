@@ -49,6 +49,19 @@ Pause playback.
 Jump to a specific time.
 * `time` - the time to jump to, in seconds.
 
+### mute()
+
+Mute the sound.
+
+### unmute()
+
+Unmutes the sound.
+
+### volume(value)
+
+Sets the sound volume.
+* `value` - the volume, in 0-1 range.
+
 ### fullscreen()
 
 Toggle the player to fullscreen, if supported. Note that this is using the javascript requestFullScreen API since Youtube doesn't support this, unless you use built-in controls.
@@ -56,6 +69,10 @@ Toggle the player to fullscreen, if supported. Note that this is using the javas
 ### getDuration()
 
 Return the current video duration.
+
+### getVolume()
+
+Return the current sound volume.
 
 ### getCurrentTime()
 
@@ -68,6 +85,10 @@ Return whether or not the player is ready (creating the player using YT API is a
 ### isPlaying()
 
 Return whether or not a video is currently playing.
+
+### isMuted()
+
+Return whether or not the sound is muted.
 
 ### hasPlayed()
 
