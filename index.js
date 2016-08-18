@@ -204,6 +204,7 @@ Youtube.prototype.getCurrentTime = function() {
 
 Youtube.prototype.destroy = function() {
     this.pause();
+    this.off();
     clearInterval(this.playbackInterval);
     this.el = null;
     if (this.player) this.player.destroy();
