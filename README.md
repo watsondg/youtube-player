@@ -101,9 +101,9 @@ Stop and destroy the player.
 ## Instance Events
 
 ### populated
-### play
-### pause
-### end
+### playing
+### paused
+### ended
 ### buffering
 ### unstarted
 ### cued
