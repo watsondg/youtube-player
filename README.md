@@ -27,6 +27,8 @@ Create a new player instance.
 * `options` - (OPTIONAL) - configuration parameters:
 - controls: show or hide the default player controls
 - allowFullscreen: enable/disable fullscreen
+- hasAutoplay: automatically plays video - only works on desktop. Defaults to false
+- hasCueAutoplay: control if `player.cue` automatically plays the video - autoplay only works on dekstop. Defaults to the `hasAutoplay` value.
 
 The player size defaults to 100% so you should use a container for any positioning/resizing.
 

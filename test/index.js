@@ -5,6 +5,7 @@ var test = require('tape');
 var Youtube = require('../index.js');
 
 var videoId = 'dQw4w9WgXcQ';
+var videoId2 = 'PJ_GIRTTRaA';
 
 var script = document.createElement('script');
 script.src = 'https://www.youtube.com/player_api';
@@ -19,11 +20,29 @@ if (window.YT) {
 }
 
 function runTests() {
+    test('Youtube autoplay test', function(assert) {
+        var wrapper = document.createElement('div');
+        document.body.appendChild(wrapper);
+        var player = new Youtube(wrapper, {
+            hasAutoplay: false,
+            hasCueAutoplay: true
+        });
+        player.cue(videoId);
+        setTimeout(function() {
+            player.once('playing', function() {
+                assert.pass('cue autoplayed');
+                player.destroy();
+                assert.end();
+            });
+            player.cue(videoId2);
+        }, 2500);
+    });
+
     test('Youtube URL test', function(assert) {
         var wrapper = document.createElement('div');
         document.body.appendChild(wrapper);
-        var player = new Youtube(wrapper);
-        player.on('statechange', function(state) {
+        var player = new Youtube(wrapper, {
+            hasAutoplay: true
         });
         player.once('playing', function() {
             assert.ok(player.player.getVideoUrl().indexOf('dQw4w9WgXcQ') > -1, 'URL should be loaded');
@@ -36,7 +55,9 @@ function runTests() {
     test('currentTime should change during playback', function(assert) {
         var wrapper = document.createElement('div');
         document.body.appendChild(wrapper);
-        var player = new Youtube(wrapper);
+        var player = new Youtube(wrapper, {
+            hasAutoplay: true
+        });
 
         setTimeout(function() {
             player.once('timeupdate', function() {
@@ -51,7 +72,9 @@ function runTests() {
     test('currentTime shouldn\'t change when playback is paused', function(assert) {
         var wrapper = document.createElement('div');
         document.body.appendChild(wrapper);
-        var player = new Youtube(wrapper);
+        var player = new Youtube(wrapper, {
+            hasAutoplay: true
+        });
         var time = 0;
 
         setTimeout(function() {

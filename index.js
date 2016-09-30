@@ -7,9 +7,10 @@ module.exports = Youtube;
 function Youtube(el, opts) {
     opts = opts || {};
     this.options = {
-        controls: opts.controls === true ? 1 : 0,
-        allowFullscreen: opts.allowFullscreen || true,
-        hasAutoPlay: opts.hasAutoPlay || true // TODO: detect if it's a mobile/tablet (iOS/Android too?)
+        controls: opts.controls === true ? true : false,
+        allowFullscreen: opts.allowFullscreen === true ? true : false,
+        hasAutoplay: opts.hasAutoplay === true ? true : false,
+        hasCueAutoplay: (opts.hasCueAutoplay || opts.hasAutoplay) === true ? true : false
     };
     this.el = el;
 
@@ -34,10 +35,10 @@ Youtube.prototype.populatePlayer = function(videoId, startTime) {
         playerVars: {
             modestbranding: 1,
             rel: 0,
-            controls: this.options.controls,
+            controls: this.options.controls === true ? 1 : 0,
             showinfo: 0,
             allowfullscreen: this.options.allowFullscreen,
-            autoplay: 1,
+            autoplay: this.options.hasAutoplay === true ? 1 : 0,
             wmode: 'transparent',
             startSeconds: startTime,
             start: startTime
@@ -53,13 +54,13 @@ Youtube.prototype.cue = function(videoId, startTime) {
     startTime = startTime || 0;
 
     if (this._isPopulated && this.player) {
-        if (!this.options.hasAutoPlay && !this._hasPlayed) {
-            this.player.cueVideoById(videoId, startTime);
-        } else {
+        if (this.options.hasAutoplay && !this._hasPlayed || this.options.hasCueAutoplay) {
             this.player.loadVideoById({
                 videoId: videoId,
                 startSeconds: startTime
             });
+        } else {
+            this.player.cueVideoById(videoId, startTime);
         }
     } else {
         this.populatePlayer(videoId, startTime);
