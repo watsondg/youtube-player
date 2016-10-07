@@ -20,6 +20,24 @@ if (window.YT) {
 }
 
 function runTests() {
+    test('Youtube instance not ready test', function(assert) {
+        var wrapper = document.createElement('div');
+        document.body.appendChild(wrapper);
+        var player = new Youtube(wrapper, {
+            hasAutoplay: false,
+            hasCueAutoplay: true
+        });
+        player.once('populated', console.log)
+        player.cue(videoId);
+        player.play();
+        setTimeout(function() {
+            assert.pass('Player not ready shouldn\'t break');
+            player.destroy();
+            wrapper.remove();
+            assert.end();
+        });
+    });
+
     test('Youtube autoplay test', function(assert) {
         var wrapper = document.createElement('div');
         document.body.appendChild(wrapper);
@@ -32,6 +50,7 @@ function runTests() {
             player.once('playing', function() {
                 assert.pass('cue autoplayed');
                 player.destroy();
+                wrapper.remove();
                 assert.end();
             });
             player.cue(videoId2);
@@ -47,6 +66,7 @@ function runTests() {
         player.once('playing', function() {
             assert.ok(player.player.getVideoUrl().indexOf('dQw4w9WgXcQ') > -1, 'URL should be loaded');
             player.destroy();
+            wrapper.remove();
             assert.end();
         });
         player.cue(videoId);
@@ -63,6 +83,7 @@ function runTests() {
             player.once('timeupdate', function() {
                 assert.ok(player.getCurrentTime() > 0, 'currentTime should have changed.');
                 player.destroy();
+                wrapper.remove();
                 assert.end();
             });
         }, 1500);
@@ -86,6 +107,7 @@ function runTests() {
                     setTimeout(function() {
                         assert.ok(player.getCurrentTime() == time, 'currentTime should\'t have changed');
                         player.destroy();
+                        wrapper.remove();
                         assert.end();
                     }, 500);
                 }, 500);

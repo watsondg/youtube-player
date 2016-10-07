@@ -129,13 +129,13 @@ Youtube.prototype.fullscreen = function() {
 };
 
 Youtube.prototype.play = function() {
-    if (!this.player) return;
+    if (!this._isPopulated) return;
 
     this.player.playVideo();
 };
 
 Youtube.prototype.pause = function() {
-    if (!this.player) return;
+    if (!this._isPopulated) return;
 
     try {
         this.player.pauseVideo();
@@ -143,26 +143,26 @@ Youtube.prototype.pause = function() {
 };
 
 Youtube.prototype.seek = function(time) {
-    if (!this.player) return;
+    if (!this._isPopulated) return;
 
     this.player.seekTo(time);
     this.player.playVideo();
 };
 
 Youtube.prototype.volume = function(value) {
-    if (!this.player) return;
+    if (!this._isPopulated) return;
 
     this.player.setVolume(value * 100);
 };
 
 Youtube.prototype.mute = function() {
-    if (!this.player) return;
+    if (!this._isPopulated) return;
 
     this.player.mute();
 };
 
 Youtube.prototype.unmute = function() {
-    if (!this.player) return;
+    if (!this._isPopulated) return;
 
     this.player.unMute();
 };
