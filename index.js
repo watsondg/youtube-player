@@ -168,19 +168,19 @@ Youtube.prototype.unmute = function() {
 };
 
 Youtube.prototype.isMuted = function() {
-    if (!this.player) return false;
+    if (!this._isPopulated) return false;
 
     return this.player.isMuted();
 };
 
 Youtube.prototype.getVolume = function() {
-    if (!this.player) return 0;
+    if (!this._isPopulated) return 0;
 
     return this.player.getVolume();
 };
 
 Youtube.prototype.getDuration = function() {
-    if (!this.player) return 0;
+    if (!this._isPopulated) return 0;
 
     return this.player.getDuration();
 };
@@ -198,7 +198,7 @@ Youtube.prototype.hasPlayed = function() {
 };
 
 Youtube.prototype.getCurrentTime = function() {
-    if (!this.player) return 0;
+    if (!this._isPopulated) return 0;
 
     return this.player.getCurrentTime();
 };

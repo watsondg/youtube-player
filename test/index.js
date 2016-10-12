@@ -27,11 +27,12 @@ function runTests() {
             hasAutoplay: false,
             hasCueAutoplay: true
         });
-        player.once('populated', console.log)
         player.cue(videoId);
         player.play();
+        var currentTime = player.getCurrentTime();
         setTimeout(function() {
             assert.pass('Player not ready shouldn\'t break');
+            assert.deepEqual(currentTime, 0, 'Player time should be 0');
             player.destroy();
             wrapper.remove();
             assert.end();
